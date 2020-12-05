@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-import '../../../core/widgets/app_progress_indicator.dart';
 import '../../../core/widgets/round_button.dart';
+import '../../chat_screen/pages/chat_screen.dart';
 import '../helpers/helpers.dart';
 import '../widgets/local_widgets.dart';
 import 'login_screen.dart';
@@ -18,7 +17,6 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailTextController = TextEditingController();
   bool _emailValidated = false;
-  bool _loading = false;
 
   final TextEditingController _passwordTextController = TextEditingController();
   bool _passwordValidated = false;
@@ -50,14 +48,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
       bool _passwordValid =
           validationChecker.passwordVerify(_passwordTextController.text);
       if (_emailvalid && _passwordValid) {
-        _isLoading(true);
         EmailSignupLogin emailSignUp = EmailSignupLogin();
-        await emailSignUp.emailSignUp(
+        bool isSignedUp = await emailSignUp.emailSignUp(
           context,
           email: _emailTextController.text,
           password: _passwordTextController.text,
         );
-        _isLoading(false);
+
+        print(isSignedUp);
+        if (isSignedUp) {
+          await Navigator.popAndPushNamed(context, ChatScreen.id);
+        }
       }
     }
   }
@@ -66,57 +67,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
     FacebookSignUpLogin(context, wantToSignUp: true);
   }
 
-  void _isLoading(bool loading) {
-    setState(() {
-      _loading = loading;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: true,
-      resizeToAvoidBottomInset: true,
-      body: ModalProgressHUD(
-        inAsyncCall: _loading,
-        progressIndicator: const PlatformSpecificProgressIndicator(),
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: ListView(
-            children: <Widget>[
-              EmailSection(
-                paddingAround: 6,
-                emailTextController: _emailTextController,
-                validator: _emailValidated,
-                fontSize: 28,
-              ),
-              PasswordSection(
-                passwordTextController: _passwordTextController,
-                validator: _passwordValidated,
-                fontSize: 18,
-                paddingAround: 18,
-              ),
-              RoundedButton(
-                title: 'Sign Up',
-                colour: Colors.lightBlueAccent,
-                onPressed: _signUpButtonClick,
-              ),
-              OptionSection(
-                paddingAround: 8,
-                actionText: "Sign In",
-                fontSize: 18,
-                onPress: () async {
-                  await Navigator.popAndPushNamed(context, LoginScreen.id);
-                },
-                titleText: "Already have an account? ",
-              ),
-              const OrSection(),
-              RoundedButton(
-                title: 'Continue with Facebook',
-                colour: Colors.blueAccent,
-                onPressed: _signUpWithFacebook,
-              ),
-            ],
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              children: <Widget>[
+                EmailSection(
+                  paddingAround: 6,
+                  emailTextController: _emailTextController,
+                  validator: _emailValidated,
+                  fontSize: 28,
+                ),
+                PasswordSection(
+                  passwordTextController: _passwordTextController,
+                  validator: _passwordValidated,
+                  fontSize: 18,
+                  paddingAround: 18,
+                ),
+                RoundedButton(
+                  title: 'Sign Up',
+                  colour: Colors.lightBlueAccent,
+                  onPressed: _signUpButtonClick,
+                ),
+                OptionSection(
+                  paddingAround: 8,
+                  actionText: "Sign In",
+                  fontSize: 18,
+                  onPress: () async {
+                    await Navigator.popAndPushNamed(context, LoginScreen.id);
+                  },
+                  titleText: "Already have an account? ",
+                ),
+                const OrSection(),
+                RoundedButton(
+                  title: 'Continue with Facebook',
+                  colour: Colors.blueAccent,
+                  onPressed: _signUpWithFacebook,
+                ),
+              ],
+            ),
           ),
         ),
       ),

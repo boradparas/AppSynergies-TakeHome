@@ -15,8 +15,6 @@ class EmailSignupLogin {
       );
 
       if (userCredential != null) {
-        String idToken = await _auth.currentUser.getIdToken(true);
-        print("---->" + idToken);
         return true;
       } else {
         CommonDialog().commomDialog(context,
@@ -41,7 +39,7 @@ class EmailSignupLogin {
 
   // ignore: missing_return
   Future<bool> emailSignUp(BuildContext context,
-      {String email, String password, String username}) async {
+      {String email, String password}) async {
     try {
       FirebaseAuth _auth = FirebaseAuth.instance;
       UserCredential userCredential = await _auth
@@ -56,8 +54,7 @@ class EmailSignupLogin {
           email: email,
           password: password,
         );
-        await _auth.currentUser.updateProfile(displayName: username);
-        String idToken = await userCredential.user.getIdToken(true);
+        return true;
       } else {
         CommonDialog().commomDialog(context,
             message: 'Something went wrong please try again later.');
@@ -75,6 +72,7 @@ class EmailSignupLogin {
       }
       // ignore: avoid_catches_without_on_clauses
     } catch (e) {
+      print(e);
       return false;
     }
   }
