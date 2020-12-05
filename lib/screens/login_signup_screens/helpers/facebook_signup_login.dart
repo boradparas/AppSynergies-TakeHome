@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../../core/helpers/auth_helper.dart';
 import '../../../core/utils/constants.dart';
 import '../../../core/widgets/app_dialog.dart';
+import '../../chat_screen/pages/chat_screen.dart';
 import '../widgets/facebook_auth_webview.dart';
 
 class FacebookSignUpLogin {
@@ -26,6 +28,8 @@ class FacebookSignUpLogin {
         final UserCredential userCredential =
             await FirebaseAuth.instance.signInWithCredential(facebookAuthCred);
         if (userCredential != null) {
+          await AuthHelper.setAuthState(true);
+          await Navigator.popAndPushNamed(context, ChatScreen.id);
           return true;
         } else {
           CommonDialog()
@@ -47,6 +51,8 @@ class FacebookSignUpLogin {
         final UserCredential userCredential =
             await FirebaseAuth.instance.signInWithCredential(facebookAuthCred);
         if (userCredential != null) {
+          await AuthHelper.setAuthState(true);
+          await Navigator.popAndPushNamed(context, ChatScreen.id);
           return true;
         } else {
           CommonDialog().commomDialog(context,

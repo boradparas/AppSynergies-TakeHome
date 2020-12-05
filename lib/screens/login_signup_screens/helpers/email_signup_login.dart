@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../../core/helpers/auth_helper.dart';
 import '../../../core/widgets/app_dialog.dart';
 
 class EmailSignupLogin {
@@ -15,6 +16,7 @@ class EmailSignupLogin {
       );
 
       if (userCredential != null) {
+        await AuthHelper.setAuthState(true);
         return true;
       } else {
         CommonDialog().commomDialog(context,
@@ -54,6 +56,7 @@ class EmailSignupLogin {
           email: email,
           password: password,
         );
+        await AuthHelper.setAuthState(true);
         return true;
       } else {
         CommonDialog().commomDialog(context,

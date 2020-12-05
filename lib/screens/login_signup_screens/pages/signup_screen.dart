@@ -54,8 +54,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           email: _emailTextController.text,
           password: _passwordTextController.text,
         );
-
-        print(isSignedUp);
         if (isSignedUp) {
           await Navigator.popAndPushNamed(context, ChatScreen.id);
         }
