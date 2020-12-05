@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "840186982521",
+    "project_id": "appsynergies-takehome",
+    "storage_bucket": "appsynergies-takehome.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840186982521:android:9c317ef25c10765b40a4a8",
+        "android_client_info": {
+          "package_name": "com.example.takehome_app_synergies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840186982521-di4rnkhth2rs0p1bovl8m610srvfgk9n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQryC5kbO2Zf7y-3dON3fGPyvctLOXk2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "840186982521-di4rnkhth2rs0p1bovl8m610srvfgk9n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
