@@ -36,6 +36,7 @@ class _ChatScreenState extends State<ChatScreen> {
       if (user != null) {
         loggedInUser = user;
       }
+      // ignore: avoid_catches_without_on_clauses
     } catch (e) {
       print(e);
     }
@@ -82,11 +83,13 @@ class _ChatScreenState extends State<ChatScreen> {
                     FlatButton(
                       onPressed: () {
                         messageTextController.clear();
-                        _firestore.collection('messages').add({
-                          'text': messageText,
-                          'sender': loggedInUser.email,
-                          "timestamp": Timestamp.now().microsecondsSinceEpoch,
-                        });
+                        if (messageText != null && messageText.isNotEmpty) {
+                          _firestore.collection('messages').add({
+                            'text': messageText,
+                            'sender': loggedInUser.email,
+                            "timestamp": Timestamp.now().microsecondsSinceEpoch,
+                          });
+                        }
                       },
                       child: const Text(
                         'Send',

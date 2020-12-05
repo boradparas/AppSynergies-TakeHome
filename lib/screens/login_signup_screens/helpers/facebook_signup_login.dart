@@ -41,6 +41,7 @@ class FacebookSignUpLogin {
         return false;
       }
     }
+    return false;
   }
 
   Future<bool> _facebookLogin() async {
@@ -66,6 +67,7 @@ class FacebookSignUpLogin {
         return false;
       }
     }
+    return false;
   }
 
   Future<String> _resultFromFacebook() async {

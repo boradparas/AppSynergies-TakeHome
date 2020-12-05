@@ -28,6 +28,7 @@ class AuthHelper {
     return prefs.getBool(_kAuth) ?? false;
   }
 
+  // ignore: avoid_positional_boolean_parameters
   static Future<bool> setAuthState(bool value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
