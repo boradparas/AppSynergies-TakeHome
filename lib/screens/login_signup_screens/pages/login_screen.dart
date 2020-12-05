@@ -1,9 +1,8 @@
-import 'dart:io' show Platform;
-
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import '../../../core/widgets/app_progress_indicator.dart';
+import '../../../core/widgets/round_button.dart';
 import '../helpers/helpers.dart';
 import '../widgets/local_widgets.dart';
 import 'signup_screen.dart';
@@ -120,12 +119,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   paddingAround: 8,
                 ),
               ),
-              CustomIconButton(
-                paddingAround: Platform.isAndroid ? 7 : 1,
-                color: Colors.blue,
-                iconData: Icons.login,
-                name: "Login",
-                onPress: _loginButtonClick,
+              RoundedButton(
+                title: 'Log In',
+                colour: Colors.lightBlueAccent,
+                onPressed: _loginButtonClick,
               ),
               OptionSection(
                 paddingAround: 8,
@@ -137,12 +134,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 titleText: "Don't have an account? ",
               ),
               const OrSection(),
-              CustomIconButton(
-                paddingAround: Platform.isAndroid ? 7 : 1,
-                color: Colors.blue,
-                iconData: Icons.login,
-                name: "Continue with Facebook",
-                onPress: _loginWithFacebook,
+              RoundedButton(
+                title: 'Continue with Facebook',
+                colour: Colors.blueAccent,
+                onPressed: _loginWithFacebook,
               ),
             ],
           ),
